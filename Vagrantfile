@@ -5,24 +5,17 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-$install_docker = <<INSTALL_DOCKER
-echo Installing docker
-curl -sSL https://releases.rancher.com/install-docker/1.12.sh | sh
-sudo usermod -aG docker vagrant
-INSTALL_DOCKER
-
-
+#
 Vagrant.configure(2) do |config|
 
-  config.vm.provision "shell", inline: $install_docker
-  #config.vm.provision "shell", path:"setupBridge.sh"
+  config.vm.provision "shell", path:"install_docker.sh"
 
   config.vm.define "cattleh1" do |cattleh1|
     cattleh1.vm.hostname = 'cattleh1'
     cattleh1.vm.box= "ubuntu/trusty64"
     cattleh1.vm.box_url = "ubuntu/trusty64"
 
-    cattleh1.vm.network :private_network, ip: "172.22.101.101",
+    cattleh1.vm.network :private_network, ip: "172.22.101.2",
       nic_type: "82545EM"
 
     cattleh1.vm.provider :virtualbox do |v|
@@ -38,7 +31,7 @@ Vagrant.configure(2) do |config|
     cattleh2.vm.box= "ubuntu/trusty64"
     cattleh2.vm.box_url = "ubuntu/trusty64"
 
-    cattleh2.vm.network :private_network, ip: "172.22.101.102",
+    cattleh2.vm.network :private_network, ip: "172.22.101.3",
       nic_type: "82545EM"
 
     cattleh2.vm.provider :virtualbox do |v|
@@ -54,7 +47,7 @@ Vagrant.configure(2) do |config|
      cattleh3.vm.box= "centos/7"
      cattleh3.vm.box_url = "centos/7"
 
-     cattleh3.vm.network :private_network, ip: "172.22.101.103",
+     cattleh3.vm.network :private_network, ip: "172.22.101.4",
        nic_type: "82545EM"
 
      cattleh3.vm.provider :virtualbox do |v|
