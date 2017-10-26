@@ -42,20 +42,52 @@ Vagrant.configure(2) do |config|
     end
   end
 
-   config.vm.define "cattleh3" do |cattleh3|
-     cattleh3.vm.hostname = 'cattleh3'
-     cattleh3.vm.box= "centos/7"
-     cattleh3.vm.box_url = "centos/7"
+  config.vm.define "cattleh3" do |cattleh3|
+    cattleh3.vm.hostname = 'cattleh3'
+    cattleh3.vm.box= "centos/7"
+    cattleh3.vm.box_url = "centos/7"
 
-     cattleh3.vm.network :private_network, ip: "172.22.101.4",
-       nic_type: "82545EM"
+    cattleh3.vm.network :private_network, ip: "172.22.101.4",
+      nic_type: "82545EM"
 
-     cattleh3.vm.provider :virtualbox do |v|
-       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-       v.customize ["modifyvm", :id, "--memory", 2048]
-       v.customize ["modifyvm", :id, "--name", "cattleh3"]
-       v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
-     end
-   end
+    cattleh3.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 2048]
+      v.customize ["modifyvm", :id, "--name", "cattleh3"]
+      v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+    end
+  end
+
+  config.vm.define "cattleh4" do |cattleh4|
+    cattleh4.vm.hostname = 'cattleh4'
+    cattleh4.vm.box= "ubuntu/trusty64"
+    cattleh4.vm.box_url = "ubuntu/trusty64"
+
+    cattleh4.vm.network :private_network, ip: "172.22.101.5",
+      nic_type: "82545EM"
+
+    cattleh4.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 2048]
+      v.customize ["modifyvm", :id, "--name", "cattleh4"]
+      v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+    end
+  end
+
+  config.vm.define "cattleh5" do |cattleh5|
+    cattleh5.vm.hostname = 'cattleh5'
+    cattleh5.vm.box= "MatthewHartstonge/RancherOS"
+    cattleh5.vm.box_url = "MatthewHartstonge/RancherOS"
+
+    cattleh5.vm.network :private_network, ip: "172.22.101.6",
+      nic_type: "82545EM"
+
+    cattleh5.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 2048]
+      v.customize ["modifyvm", :id, "--name", "cattleh5"]
+      v.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
+    end
+  end
 
 end
